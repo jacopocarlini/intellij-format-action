@@ -15,6 +15,7 @@ jobs:
         uses: jacopocarlini/intellij-format-action@main
         with:
           include-glob: '*.kt'
+          path: .
           fail-on-changes: false
           auto-fix: true
 

@@ -32,3 +32,4 @@ runs:
     - ${{ inputs.path }}
     - ${{ inputs.include-glob }}
     - ${{ inputs.fail-on-changes }}
+    - ${{ inputs.auto-fix }}
