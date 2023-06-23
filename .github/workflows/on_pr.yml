@@ -1,16 +1,23 @@
 name: On Pull
 on:
-  pull_request:
+  workflow_dispatch:
+  issue_comment:
+    types: [ created, edited ]
 
 jobs:
   test_with_auto_fix:
     runs-on: ubuntu-latest
     name: Test (with auto fix)
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
 
       - name: Run action
         id: test-action
@@ -28,3 +35,5 @@ jobs:
 
       - name: Push changes
         uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ github.head_ref }}
