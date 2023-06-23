@@ -1,8 +1,8 @@
 name: On Pull
 on:
-  pull_request:
-
   workflow_dispatch:
+  issue_comment:
+    types: [ created, edited ]
 
 jobs:
   test_with_auto_fix:
