@@ -9,10 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     name: Test (with auto fix)
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.github_ref }}
 
       - name: Run action
         id: test-action
