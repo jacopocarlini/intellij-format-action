@@ -41,6 +41,8 @@ fi
 
 
 if [[ "$auto_fix" == 'true' ]]; then
+  git config --global user.name 'Your Name'
+  git config --global user.email 'your-username@users.noreply.github.com'
   git commit -am "IntelliJ Formatting code"
   git push
 fi
