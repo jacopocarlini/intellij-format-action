@@ -6,8 +6,8 @@
 # - File include glob pattern.
 # - Whether to fail on file changes.
 
-if [[ $# -ne 3 ]]; then
-  echo 'Exactly three parameters (base dir path, input file pattern, fail on changes) required.'
+if [[ $# -ne 4 ]]; then
+  echo 'Exactly three parameters (base dir path, input file pattern, fail on changes, auto fix) required.'
   exit 1
 fi
 
