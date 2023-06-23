@@ -1,18 +1,21 @@
 #!/bin/bash
 
-if [[ $# -ne 5 ]]; then
-  echo 'Exactly three parameters (base dir path, input file pattern, fail on changes, auto fix) required.'
+if [[ $# -ne 6 ]]; then
+  echo 'Exactly six parameters required.'
   exit 1
 fi
 
 github_ref=$1
-base_path=$2
-include_pattern=$3
-fail_on_changes=$4
-auto_fix=$5
+github_token=$2
+base_path=$3
+include_pattern=$4
+fail_on_changes=$5
+auto_fix=$6
 
 # Prepare the workspace for safe usage:
 git config --global --add safe.directory /github/workspace
+
+git checkout $github_ref
 
 ls
 cd "/github/workspace/$base_path" || exit 2

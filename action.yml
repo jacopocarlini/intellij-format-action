@@ -30,6 +30,7 @@ runs:
   image: Dockerfile
   args:
     - ${{ github.ref_name }}
+    - ${{ github.token }}
     - ${{ inputs.path }}
     - ${{ inputs.include-glob }}
     - ${{ inputs.fail-on-changes }}

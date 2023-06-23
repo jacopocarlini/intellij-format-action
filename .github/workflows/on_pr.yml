@@ -9,13 +9,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run action
         id: test-action
-        uses: jacopocarlini/intellij-format-action@test
+        uses: findologic/intellij-format-action@test
         with:
           include-glob: '*.kt'
           path: .
           fail-on-changes: false
-          auto-fix: true
 
+      - name: Commit files
+        run: |
+          git config --local user.email "test@test.com"
+          git config --local user.name "Test"
+          git commit -a -m "Add changes"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
