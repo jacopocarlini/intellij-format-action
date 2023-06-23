@@ -12,7 +12,7 @@ jobs:
 
       - name: Run action
         id: test-action
-        uses: jacopocarlini/intellij-format-action@main
+        uses: jacopocarlini/intellij-format-action@test
         with:
           include-glob: '*.kt'
           path: .
