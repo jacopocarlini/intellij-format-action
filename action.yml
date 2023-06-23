@@ -29,6 +29,7 @@ runs:
   using: docker
   image: Dockerfile
   args:
+    - ${{ github.ref_name }}
     - ${{ inputs.path }}
     - ${{ inputs.include-glob }}
     - ${{ inputs.fail-on-changes }}
