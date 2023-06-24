@@ -80,8 +80,8 @@ def analyze_file(path):
     for problem in tree.iter("problem"):
         file_name = problem.find("file").text
         _, file_ext = os.path.splitext(file_name)
-        if file_ext.lower() not in FILE_EXTENSIONS_TO_CONSIDER:
-            continue
+        # if file_ext.lower() not in FILE_EXTENSIONS_TO_CONSIDER:
+          #  continue
         if(check_file_name_for_regex_patterns(file_name)):
             continue
         line_no = int(problem.find("line").text)
