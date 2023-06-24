@@ -1,4 +1,4 @@
-name: CI
+name: Inspector
 on:
   push:
     branches:
@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run IntelliJ Inspections
-        uses: gps/intellij-inspections@master
+        uses: jacopocarlini/intellij-format-action@main
         with:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INSPECTIONS_FILE: ./.idea/inspectionProfiles/Project_Default.xml
