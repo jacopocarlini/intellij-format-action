@@ -10,9 +10,8 @@ on:
       - created
 
 jobs:
-  test_no_changes:
+  test:
     runs-on: ubuntu-latest
-    name: Test (no formatting changes)
     steps:
       - name: Checkout
         uses: actions/checkout@v3
