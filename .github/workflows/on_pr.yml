@@ -1,4 +1,4 @@
-name: On Pull
+name: Formatting
 on:
   workflow_dispatch:
   issue_comment:
@@ -19,6 +19,11 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
+      - name: Checkout Pull Request
+        run: hub pr checkout ${{ github.event.issue.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Run action
         id: test-action
         uses: findologic/intellij-format-action@main
@@ -32,8 +37,4 @@ jobs:
           git config --local user.email "test@test.com"
           git config --local user.name "Test"
           git commit -a -m "Add changes"
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          branch: ${{ github.head_ref }}
+          git push

@@ -1,14 +1,12 @@
-FROM ubuntu:latest
+FROM gopalkrishnaps/intellij:2021.2.3
 
-RUN apt-get update \
-    && apt-get install -y bash git wget \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && wget --no-verbose -O /tmp/idea.tar.gz https://download.jetbrains.com/idea/ideaIC-2021.1.2.tar.gz \
-    && cd /opt \
-    && tar xzf /tmp/idea.tar.gz \
-    && mv /opt/idea* /opt/idea \
-    && rm /tmp/idea.tar.gz
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+COPY entrypoint.sh /entrypoint.sh
+COPY requirements.txt /requirements.txt
+COPY analyze_inspections.py /analyze_inspections.py
+
+RUN chmod +x /entrypoint.sh && \
+    chmod +x /analyze_inspections.py && \
+    pip3 install -r /requirements.txt
+
+ENTRYPOINT ["/entrypoint.sh"]

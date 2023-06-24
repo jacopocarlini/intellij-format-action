@@ -1,37 +1,16 @@
----
-name: IntelliJ Formatter
-description: |
-  Runs the IntelliJ formatter on a project to apply IDE style rules. Useful for auto-fixing,
-  as well as enforcing style rules.
+name: 'IntelliJ Inspections'
+description: 'Runs IntelliJ Inspections on a PR'
+author: 'Gopal Sharma <gps@surya-soft.com>'
 inputs:
-  include-glob:
-    description: |
-      Pattern for files to include. Supports glob-style wildcards. Multiple patterns can be separated by commas.
+  GH_TOKEN:
+    description: GitHub Token used to comment on PR
     required: false
-    default: '*'
-  path:
-    description: |
-      Path to project directory. The formatter is executed recursively from here. Must be relative to the workspace.
+  INSPECTIONS_FILE:
+    description: Path to inspections file relative to root of project directory
     required: false
-    default: '.'
-  fail-on-changes:
-    description: If true, the action fails if any file changed.
+  IGNORE_FILE_PATTERNS:
+    description: Regular expressions for the files to be ignored. The inputs are specified within square brackets where each input regular expression is enclosed within double quotes, comma separated and with correct indentations.
     required: false
-    default: 'false'
-  auto-fix:
-    description: If true, the action create a commit with the formatted code.
-    required: false
-    default: 'false'
-outputs:
-  files-changed:
-    description: Zero if none changed, greater if at least one file changed.
 runs:
-  using: docker
-  image: Dockerfile
-  args:
-    - ${{ github.ref_name }}
-    - ${{ github.token }}
-    - ${{ inputs.path }}
-    - ${{ inputs.include-glob }}
-    - ${{ inputs.fail-on-changes }}
-    - ${{ inputs.auto-fix }}
+  using: 'docker'
+  image: 'Dockerfile'
