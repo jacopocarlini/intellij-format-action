@@ -1,24 +1,19 @@
 name: Inspector
 on:
-  push:
-    branches:
-      - '*'
-    tags-ignore:
-      - '*'
-  release:
-    types:
-      - created
+  pull_request:
+
+permissions:
+  pull-requests: write
 
 jobs:
-  test_no_changes:
+  test:
     runs-on: ubuntu-latest
-    name: Test (no formatting changes)
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Run IntelliJ Inspections
-        uses: jacopocarlini/intellij-format-action@main
+        uses: jacopocarlini/intellij-format-action@test3
         with:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INSPECTIONS_FILE: ./.idea/inspectionProfiles/Project_Default.xml
